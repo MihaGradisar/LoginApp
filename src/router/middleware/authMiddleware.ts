@@ -20,7 +20,7 @@ export const userLoggedIn = (
   next: NavigationGuardNext
 ) => {
   const userAuthentication = useCounterStore()
-  if ((to.name === 'Login' || to.name === 'Register') && userAuthentication.isLoggedIn) {
+  if ((to.name === 'Login' || to.name === 'signUp') && userAuthentication.isLoggedIn) {
     next({ name: 'Dashboard' })
   } else {
     next()
