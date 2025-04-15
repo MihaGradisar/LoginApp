@@ -5,7 +5,7 @@ export const useCounterStore = defineStore('userAuthentication', () => {
 
   /* State */
 
-  const isLoggedIn = ref<boolean>(false)
+  const isLoggedIn = ref<boolean>(true)
 
   return {
     // State
