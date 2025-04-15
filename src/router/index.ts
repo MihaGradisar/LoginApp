@@ -30,6 +30,8 @@ const router = createRouter({
   ],
 })
 
+// Missing logic for non existing URLs
+
 router.beforeEach((to, from, next) => {
   const userAuthentication = useCounterStore()
   if (userAuthentication.isLoggedIn) {

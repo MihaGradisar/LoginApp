@@ -1,18 +1,23 @@
 <script setup lang="ts">
-import AppDrawer from '../components/AppDrawer.vue'
+import AppDrawer from '@/components/AppDrawer.vue';
+
+import { ref } from 'vue';
+
+const isOpen = ref<boolean>(false)
+
+const drawerToggle = () => {
+  isOpen.value != isOpen.value
+}
 
 </script>
 
 <template>
-<div class="flex transition-all duration-300">
-  <AppDrawer/>
-  <div class="flex-1 h-screen">
-    <header class="flex">
-      <div @click="console.log('Hello')" class="sm:hidden">
-
-      </div>
-      <h1 class="">This is the dashboard page</h1>
-    </header>
+  <div class="flex">
+    <div class="">
+      <AppDrawer/>
+    </div>
+    <div class="flex">
+      TEST
+    </div>
   </div>
-</div>
 </template>
