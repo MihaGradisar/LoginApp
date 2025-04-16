@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { defineEmits } from 'vue';
 
+import AppDrawerButton from './AppDrawerButton.vue';
+
 // Emits
 const emit = defineEmits<{
 	(event: 'hideDrawer'): void
@@ -10,7 +12,7 @@ const emit = defineEmits<{
 
 
 <template>
-  <div class="relative h-screen bg-blue-400 rounded-tr-lg rounded-br-lg">
+  <div class="relative h-screen bg-white rounded-tr-lg rounded-br-lg">
     <!-- Toggle Button -->
     <div 
       @click="$emit('hideDrawer')" 
@@ -22,7 +24,65 @@ const emit = defineEmits<{
       </span>
     </div>
     <!-- Drawer content -->
-    <h1>Drawer</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro incidunt itaque iure nam odio quam quasi quas tempora laudantium tenetur?</p>
+    <div>
+      <h1>Drawer</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro incidunt itaque iure nam odio quam quasi quas tempora laudantium tenetur?</p>
+
+      <!-- Drawer buttons -->
+      <AppDrawerButton>
+        <template #icon>
+          <span class="material-symbols-outlined">folder_open</span>
+        </template>
+        <template #name>
+          <p>Dashboard</p>
+        </template>
+      </AppDrawerButton>
+
+      <AppDrawerButton>
+        <template #icon>
+          <span class="material-symbols-outlined">person</span>
+        </template>
+        <template #name>
+          <p>Profile</p>
+        </template>
+      </AppDrawerButton>
+
+      <AppDrawerButton>
+        <template #icon>
+          <span class="material-symbols-outlined">import_contacts</span>
+        </template>
+        <template #name>
+          <p>Pages</p>
+        </template>
+      </AppDrawerButton>
+
+      <AppDrawerButton>
+        <template #icon>
+          <span class="material-symbols-outlined">apps</span>
+        </template>
+        <template #name>
+          <p>Applications</p>
+        </template>
+      </AppDrawerButton>
+
+      <AppDrawerButton>
+        <template #icon>
+          <span class="material-symbols-outlined">shopping_cart</span>
+        </template>
+        <template #name>
+          <p>E-Commerce</p>
+        </template>
+      </AppDrawerButton>
+        
+      <AppDrawerButton>
+        <template #icon>
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+        </template>
+        <template #name>
+          <p>Authentication</p>
+        </template>
+      </AppDrawerButton>
+
+    </div>
   </div>
 </template>
