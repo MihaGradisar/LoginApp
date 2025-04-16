@@ -23,15 +23,18 @@ const drawerToggle = () => {
         isOpen ? 'translate-x-0' : '-translate-x-full',
       ]"
     >
-      <AppDrawer />
+      <AppDrawer @hide-drawer="drawerToggle"/>
     </div>
 
     <!-- Toggle button -->
-    <button
+    <div
       @click="drawerToggle"
-      :class="['h-[30px]', 'w-[30px]', 'bg-blue-900', 'sm:hidden', 'z-50', isOpen ? 'hidden' : '']"
+      :class="['h-[40px]', 'w-[40px]', 'bg-blue-900', 'cursor-pointer', 'sm:hidden', 'rounded-lg', 'flex', 'items-center', 'justify-center', 'hover:bg-blue-800', isOpen ? 'hidden' : '']"
     >
-    </button>
+      <span class="material-symbols-outlined text-blue-300 text-[30px] select-none">
+        menu <!-- Menu icon -->
+      </span>
+    </div>
 
     <!-- Main content -->
     <div class="flex-1">
