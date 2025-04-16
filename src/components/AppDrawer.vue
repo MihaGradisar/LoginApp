@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineEmits } from 'vue';
 
-import AppDrawerButton from './AppDrawerButton.vue';
+import AppDrawerButton from './AppDrawerButton.vue'
 
 // Emits
 const emit = defineEmits<{
@@ -16,17 +16,16 @@ const emit = defineEmits<{
     <!-- Toggle Button -->
     <div 
       @click="$emit('hideDrawer')" 
-      class="absolute top-2 right-2 size-[30px] bg-blue-100 rounded-full flex items-center justify-center select-none cursor-pointer 
+      class="absolute top-2 right-2 size-[30px] bg-none rounded-full flex items-center justify-center select-none cursor-pointer 
       sm:opacity-0 sm:pointer-events-none
-      hover:bg-blue-200">
-      <span class="material-symbols-outlined text-blue-300">
+      hover:bg-gray-200">
+      <span class="material-symbols-outlined text-indigo-600">
         close <!-- Close icon -->
       </span>
     </div>
     <!-- Drawer content -->
     <div>
-      <h1>Drawer</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro incidunt itaque iure nam odio quam quasi quas tempora laudantium tenetur?</p>
+      <h1 class="mx-3 pt-10 font-bold">Menu</h1>
 
       <!-- Drawer buttons -->
       <AppDrawerButton>
@@ -35,6 +34,9 @@ const emit = defineEmits<{
         </template>
         <template #name>
           <p>Dashboard</p>
+        </template>
+        <template #select>
+          <span class="material-symbols-outlined">chevron_right</span>
         </template>
       </AppDrawerButton>
 
@@ -45,6 +47,9 @@ const emit = defineEmits<{
         <template #name>
           <p>Profile</p>
         </template>
+        <template #select>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </template>
       </AppDrawerButton>
 
       <AppDrawerButton>
@@ -53,6 +58,9 @@ const emit = defineEmits<{
         </template>
         <template #name>
           <p>Pages</p>
+        </template>
+        <template #select>
+          <span class="material-symbols-outlined">chevron_right</span>
         </template>
       </AppDrawerButton>
 
@@ -63,6 +71,9 @@ const emit = defineEmits<{
         <template #name>
           <p>Applications</p>
         </template>
+        <template #select>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </template>
       </AppDrawerButton>
 
       <AppDrawerButton>
@@ -71,6 +82,9 @@ const emit = defineEmits<{
         </template>
         <template #name>
           <p>E-Commerce</p>
+        </template>
+        <template #select>
+          <span class="material-symbols-outlined">chevron_right</span>
         </template>
       </AppDrawerButton>
         
@@ -81,8 +95,10 @@ const emit = defineEmits<{
         <template #name>
           <p>Authentication</p>
         </template>
+        <template #select>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </template>
       </AppDrawerButton>
-
     </div>
   </div>
 </template>

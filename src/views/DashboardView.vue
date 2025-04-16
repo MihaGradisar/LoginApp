@@ -6,25 +6,25 @@ const isOpen = ref(false);
 
 // Drawer toggle logic
 const drawerToggle = () => {
-  isOpen.value = !isOpen.value;
+  isOpen.value = !isOpen.value
 };
 </script>
 
 <template>
   <div class="w-screen h-screen bg-blue-100"> <!-- Background color -->
     <div class="relative">
-      <!-- Menu -->
+      <!-- Header menu -->
       <div class="flex items-center justify-between bg-orange-200 w-screen max-sm:h-[60px] pl-[10px] pr-[10px]">
         <div
           @click="drawerToggle"
-          :class="['h-[40px]', 'w-[40px]', 'bg-blue-900', 'cursor-pointer', 'sm:hidden', 'rounded-lg', 'flex', 'items-center', 'justify-center', 'hover:bg-blue-800']"
+          class="h-[40px] w-[40px] bg-blue-900 cursor-pointer sm:hidden rounded-lg flex items-center justify-center hover:bg-blue-800'"
         >
           <span class="material-symbols-outlined text-blue-300 text-[30px] select-none">
             menu <!-- Toggle button -->
           </span>
         </div>
         <div class="size-[40px] sm:hidden">
-          <img src="../assets/images/logo.svg" alt="">
+          <img src="../assets/images/logo.svg" alt="Logo">
         </div>
       </div>
 
