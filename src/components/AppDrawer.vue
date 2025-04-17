@@ -7,7 +7,7 @@ import buttons from '../data/drawerButtons.json'
 import { defineEmits } from 'vue'
 
 // Emits
-const emit = defineEmits<{
+defineEmits<{
   (event: 'hideDrawer'): void
 }>()
 
@@ -34,77 +34,19 @@ const emit = defineEmits<{
       <h1 class="mx-3 font-bold text-gray-700">Menu</h1>
 
       <!-- Drawer buttons -->
-      <AppDrawerButton>
+      <div v-for="button in buttons">
+        <AppDrawerButton>
         <template #icon>
-          <span class="material-symbols-outlined">folder_open</span>
+          <span class="material-symbols-outlined">{{ button.icon }}</span>
         </template>
         <template #name>
-          <p>Dashboard</p>
+          <p>{{ button.name }}</p>
         </template>
         <template #select>
-          <span class="material-symbols-outlined">chevron_right</span>
+          <span class="material-symbols-outlined">{{ button.select }}</span>
         </template>
       </AppDrawerButton>
-
-      <AppDrawerButton>
-        <template #icon>
-          <span class="material-symbols-outlined">person</span>
-        </template>
-        <template #name>
-          <p>Profile</p>
-        </template>
-        <template #select>
-          <span class="material-symbols-outlined">chevron_right</span>
-        </template>
-      </AppDrawerButton>
-
-      <AppDrawerButton>
-        <template #icon>
-          <span class="material-symbols-outlined">import_contacts</span>
-        </template>
-        <template #name>
-          <p>Pages</p>
-        </template>
-        <template #select>
-          <span class="material-symbols-outlined">chevron_right</span>
-        </template>
-      </AppDrawerButton>
-
-      <AppDrawerButton>
-        <template #icon>
-          <span class="material-symbols-outlined">apps</span>
-        </template>
-        <template #name>
-          <p>Applications</p>
-        </template>
-        <template #select>
-          <span class="material-symbols-outlined">chevron_right</span>
-        </template>
-      </AppDrawerButton>
-
-      <AppDrawerButton>
-        <template #icon>
-          <span class="material-symbols-outlined">shopping_cart</span>
-        </template>
-        <template #name>
-          <p>E-Commerce</p>
-        </template>
-        <template #select>
-          <span class="material-symbols-outlined">chevron_right</span>
-        </template>
-      </AppDrawerButton>
-
-      <AppDrawerButton>
-        <template #icon>
-          <span class="material-symbols-outlined">admin_panel_settings</span>
-        </template>
-        <template #name>
-          <p>Authentication</p>
-        </template>
-        <template #select>
-          <span class="material-symbols-outlined">chevron_right</span>
-        </template>
-      </AppDrawerButton>
+      </div>
 
       <!-- Logout button -->
       <div class="flex justify-start items-end mx-3 mt-auto pb-4">
