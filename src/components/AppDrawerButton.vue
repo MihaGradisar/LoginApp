@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="group flex justify-between items-center h-[35px] my-1 mx-3 select-none cursor-pointer rounded-md hover:bg-gray-200">
+  <div class="group flex justify-between w-full select-none cursor-pointer hover:bg-gray-200 rounded-md">
     <!-- Icon and Name Section (flex-row) -->
     <div class="flex flex-row items-center">
       <div class="text-gray-700 pt-1 px-2 group-hover:text-indigo-600">

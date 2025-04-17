@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import { useCounterStore } from '@/stores/userAuthentication'
 
+import AppDrawer from './components/AppDrawer.vue';
+
 const userAuthentication = useCounterStore()
 </script>
 
 <template>
-  <!--<header>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/register">Register</RouterLink>
-      </nav>
-  </header>-->
-  <RouterView />
+  <AppDrawer v-if="userAuthentication.isLoggedIn" />
+  <RouterView v-if="!userAuthentication.isLoggedIn" />
 </template>

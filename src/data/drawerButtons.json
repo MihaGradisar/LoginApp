@@ -1,36 +1,42 @@
 [
   {
     "id": 1,
+    "router": "/",
     "icon": "folder_open", 
     "name": "Dashboard",
     "select": "chevron_right"
   },
   {
     "id": 2,
+    "router": "/profile",
     "icon": "person", 
     "name": "Profile",
     "select": "chevron_right"
   },
   {
     "id": 3,
+    "router": "/pages",
     "icon": "import_contacts", 
     "name": "Pages",
     "select": "chevron_right"
   },
   {
     "id": 4,
+    "router": "/applications",
     "icon": "apps", 
     "name": "Applications",
     "select": "chevron_right"
   },
   {
     "id": 5,
+    "router": "/ecommerce",
     "icon": "shopping_cart", 
     "name": "E-Commerce",
     "select": "chevron_right"
   },
   {
     "id": 6,
+    "router": "/authentication",
     "icon": "admin_panel_settings", 
     "name": "Authentication",
     "select": "chevron_right"

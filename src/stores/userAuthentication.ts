@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useCounterStore = defineStore('userAuthentication', () => {
@@ -7,9 +7,15 @@ export const useCounterStore = defineStore('userAuthentication', () => {
 
   const isLoggedIn = ref<boolean>(true)
 
+
+  // TEST CODE for checking the login status
+  watch (isLoggedIn,(newValue) => {
+    console.log(newValue)
+  })
+
   return {
     // State
     isLoggedIn 
   }
-  
+
 })
