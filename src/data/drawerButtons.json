@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "icon": "folder_open", 
+    "name": "Dashboard",
+    "select": "chevron_right"
+  },
+  {
+    "id": 2,
+    "icon": "person", 
+    "name": "Profile",
+    "select": "chevron_right"
+  },
+  {
+    "id": 3,
+    "icon": "import_contacts", 
+    "name": "Pages",
+    "select": "chevron_right"
+  },
+  {
+    "id": 4,
+    "icon": "apps", 
+    "name": "Applications",
+    "select": "chevron_right"
+  },
+  {
+    "id": 5,
+    "icon": "shopping_cart", 
+    "name": "E-Commerce",
+    "select": "chevron_right"
+  },
+  {
+    "id": 6,
+    "icon": "admin_panel_settings", 
+    "name": "Authentication",
+    "select": "chevron_right"
+  }
+]

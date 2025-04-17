@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { defineEmits } from 'vue';
-
 import AppDrawerButton from './AppDrawerButton.vue'
+import AppLogoutButton from './AppLogoutButton.vue'
+
+import buttons from '../data/drawerButtons.json'
+
+import { defineEmits } from 'vue'
 
 // Emits
 const emit = defineEmits<{
-	(event: 'hideDrawer'): void
+  (event: 'hideDrawer'): void
 }>()
 
 </script>
-
 
 <template>
   <div class="relative h-screen bg-white rounded-tr-lg rounded-br-lg">
@@ -23,9 +25,13 @@ const emit = defineEmits<{
         close <!-- Close icon -->
       </span>
     </div>
+
     <!-- Drawer content -->
-    <div>
-      <h1 class="mx-3 pt-10 font-bold">Menu</h1>
+    <div class="flex flex-col h-screen">
+      <div class="h-[150px]">
+
+      </div>
+      <h1 class="mx-3 font-bold text-gray-700">Menu</h1>
 
       <!-- Drawer buttons -->
       <AppDrawerButton>
@@ -87,7 +93,7 @@ const emit = defineEmits<{
           <span class="material-symbols-outlined">chevron_right</span>
         </template>
       </AppDrawerButton>
-        
+
       <AppDrawerButton>
         <template #icon>
           <span class="material-symbols-outlined">admin_panel_settings</span>
@@ -99,6 +105,15 @@ const emit = defineEmits<{
           <span class="material-symbols-outlined">chevron_right</span>
         </template>
       </AppDrawerButton>
+
+      <!-- Logout button -->
+      <div class="flex justify-start items-end mx-3 mt-auto pb-4">
+        <AppLogoutButton class="w-fit">
+          <template #name>
+            <p>Logout</p>
+          </template>
+        </AppLogoutButton>
+      </div>
     </div>
   </div>
 </template>
