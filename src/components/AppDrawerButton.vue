@@ -1,10 +1,5 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <div class="group flex justify-between w-full select-none cursor-pointer hover:bg-gray-200 rounded-md">
-    <!-- Icon and Name Section (flex-row) -->
     <div class="flex flex-row items-center">
       <div class="text-gray-700 pt-1 px-2 group-hover:text-indigo-600">
         <slot name="icon"></slot>
@@ -19,4 +14,3 @@
     </div>
   </div>
 </template>
-

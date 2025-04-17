@@ -7,7 +7,6 @@ export const useCounterStore = defineStore('userAuthentication', () => {
 
   const isLoggedIn = ref<boolean>(true)
 
-
   // TEST CODE for checking the login status
   watch (isLoggedIn,(newValue) => {
     console.log(newValue)

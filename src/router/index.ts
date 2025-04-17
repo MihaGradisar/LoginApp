@@ -1,14 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import App from '../App.vue'
+
 import DashboardView from '@/views/DashboardView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import PagesView from '@/views/PagesView.vue'
 import ApplicationsView from '@/views/ApplicationsView.vue'
 import EcommerceView from '@/views/EcommerceView.vue'
 import AuthenticationView from '@/views/AuthenticationView.vue'
+import PageNotFoundView from '@/views/PageNotFoundView.vue'
 
 import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
+
 import { userLoggedIn, userLoggedOut } from './middleware/authMiddleware'
 
 
@@ -62,10 +64,13 @@ const router = createRouter({
       name: 'signUp',
       component: SignUpView,
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: '404',
+      component: PageNotFoundView,
+    },
   ],
 })
-
-// Missing logic for non existing URLs + logic for other pages that are after "/"
 
 router.beforeEach((to, from, next) => {
   const userAuthentication = useCounterStore()
