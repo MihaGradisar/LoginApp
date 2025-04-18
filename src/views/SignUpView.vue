@@ -19,7 +19,7 @@ const userAuthentication = useCounterStore()
       </div>
       <!-- Input fields -->
       <div>
-        <AppInputField v-model="userAuthentication.loginInfo.username" :placeholder="'Type your username'">
+        <AppInputField v-model="userAuthentication.loginInfo.username" :type="'text'" :placeholder="'Type your username'">
           <template #text>
             Username
           </template>
@@ -28,7 +28,7 @@ const userAuthentication = useCounterStore()
           </template>
         </AppInputField>
 
-        <AppInputField :placeholder="'Type your password'">
+        <AppInputField v-model="userAuthentication.loginInfo.password" :type="'password'" :placeholder="'Type your password'">
           <template #text>
             Password
           </template>

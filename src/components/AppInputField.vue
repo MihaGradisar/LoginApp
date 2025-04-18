@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
-defineProps<{
-  placeholder: string,
-  
-}>()
-
+const input = defineModel<string>()
+defineProps<{ placeholder: string, type: string }>()
 </script>
 
 <template>
@@ -17,7 +12,12 @@ defineProps<{
       <span class="material-symbols-outlined text-gray-500">
         <slot name="icon"></slot>
       </span>
-      <input class="border-none outline-none" type="text" :placeholder="placeholder">
+      <input
+        v-model="input"
+        :placeholder="placeholder"
+        :type="type"
+        class="focus:outline-none"
+      />
     </div>
     <div class="border-b"></div>
   </div>

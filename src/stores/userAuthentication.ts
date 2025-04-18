@@ -20,6 +20,8 @@ export const useCounterStore = defineStore('userAuthentication', () => {
     password: ''
   })
 
+  const sentLoginInfo: LoginInfo = loginInfo
+
   /* Actions */
   const toLogin = () => {
     isLoggedIn.value = false
@@ -37,7 +39,16 @@ export const useCounterStore = defineStore('userAuthentication', () => {
   }
 
   const login = () => {
-    isLoggedIn.value = true
+    // Checks if the input fields are not empty
+    if (loginInfo.username && loginInfo.password !== '') {
+      console.log('sent:' + sentLoginInfo) // 
+      loginInfo.username = '' // Sets the values back to ''
+      loginInfo.password = '' // Sets the values back to ''
+      isLoggedIn.value = true
+    }
+    else {
+      console.log('Invalid email address or password')
+    }
     router.push({ name: 'Dashboard' })
   }
 
@@ -47,7 +58,7 @@ export const useCounterStore = defineStore('userAuthentication', () => {
     console.log(newValue)
   })
 
-  watch (loginInfo,(newValue) => {
+  watch(loginInfo, (newValue) => {
     console.log(newValue)
   })
 
