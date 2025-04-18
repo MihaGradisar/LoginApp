@@ -9,6 +9,8 @@ import buttons from '../data/drawerButtons.json'
 
 import { ref } from 'vue'
 
+const userAuthentication = useCounterStore()
+
 const isOpen = ref(false)
 
 // Drawer toggle logic
@@ -16,18 +18,10 @@ const drawerToggle = () => {
   isOpen.value = !isOpen.value
 }
 
-const userAuthentication = useCounterStore()
-const router = useRouter()
-
-// Logout logic
-const logout = () => {
-  userAuthentication.isLoggedIn = false
-  router.push({ name: 'Login' })
-}
 </script>
 
 <template>
-  <div class="w-screen h-screen bg-blue-100"> <!-- Background color -->
+  <div class="w-screen h-screen bg-gray-50"> <!-- Background color -->
     <div class="relative">
       <!-- Header menu -->
       <div class="flex items-center justify-between bg-orange-200 w-screen max-sm:h-[60px] pl-[10px] pr-[10px]">
@@ -55,7 +49,7 @@ const logout = () => {
           ]"
         >
           <!-- Drawer menu -->
-          <div class="relative h-screen bg-white rounded-tr-lg rounded-br-lg">
+          <div class="relative h-screen shadow-xl bg-white rounded-tr-lg rounded-br-lg">
             <!-- Toggle Button -->
             <div 
               @click="drawerToggle" 
@@ -93,7 +87,7 @@ const logout = () => {
               </div>
 
               <!-- Logout button -->
-              <div @click="logout" class="flex justify-start items-end mx-3 mt-auto pb-4">
+              <div @click="userAuthentication.logout" class="flex justify-start items-end mx-3 mt-auto pb-4">
                 <AppLogoutButton class="w-fit">
                   <template #name>
                     <p>Logout</p>

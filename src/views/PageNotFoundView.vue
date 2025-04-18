@@ -15,8 +15,8 @@ const goBack = () => {
       <img src="../assets/images/404.png" alt="404">
     </div>
     <div class="flex flex-col justify-center items-start mb-[50px] max-sm:items-center">
-      <div class="text-[100px] font-extrabold max-sm:text-[60px]">Oops,</div>
-      <div class="text-[70px] font-extrabold max-sm:text-[40px]"><span class="text-indigo-500">Nothing</span> here...</div>
+      <h1 class="text-[100px] font-extrabold max-sm:text-[50px]">Oops,</h1>
+      <h1 class="text-[70px] font-extrabold max-sm:text-[30px]"><span class="text-indigo-500">Nothing</span> here...</h1>
       <div class="w-[250px] sm:hidden">
         <img src="../assets/images/404.png" alt="404">
       </div>
