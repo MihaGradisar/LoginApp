@@ -8,6 +8,16 @@ import AppButton from '@/components/AppButton.vue'
 // Pinia store
 const userAuthentication = useCounterStore()
 
+interface RegisterInfo {
+  username: string,
+  password: string,
+}
+
+const registerInfo: RegisterInfo = {
+  username: '',
+  password: '',
+}
+
 </script>
 
 <template>
@@ -19,7 +29,7 @@ const userAuthentication = useCounterStore()
       </div>
       <!-- Input fields -->
       <div>
-        <AppInputField v-model="userAuthentication.loginInfo.username" :type="'text'" :placeholder="'Type your username'">
+        <AppInputField v-model="registerInfo.username" :type="'text'" :placeholder="'Type your username'">
           <template #text>
             Username
           </template>
@@ -28,7 +38,7 @@ const userAuthentication = useCounterStore()
           </template>
         </AppInputField>
 
-        <AppInputField v-model="userAuthentication.loginInfo.password" :type="'password'" :placeholder="'Type your password'">
+        <AppInputField v-model="registerInfo.password" :type="'password'" :placeholder="'Type your password'">
           <template #text>
             Password
           </template>
@@ -41,7 +51,7 @@ const userAuthentication = useCounterStore()
       </div>
 
       <!-- Login button -->
-      <AppButton @click="userAuthentication.toLogin" class="w-[218px] h-[35px] text-[14px] mt-[20px]">
+      <AppButton @click="userAuthentication.register(registerInfo.username, registerInfo.password)" class="w-[218px] h-[35px] text-[14px] mt-[20px]">
         SIGN UP
       </AppButton>
         <div class="mt-auto w-[100px]">

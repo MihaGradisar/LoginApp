@@ -8,6 +8,16 @@ import AppButton from '@/components/AppButton.vue'
 // Pinia store
 const userAuthentication = useCounterStore()
 
+interface LoginInfo {
+  username: string,
+  password: string,
+}
+
+const loginInfo: LoginInfo = {
+  username: '',
+  password: '',
+}
+
 </script>
 
 <template>
@@ -19,7 +29,7 @@ const userAuthentication = useCounterStore()
       </div>
       <!-- Input fields -->
       <div>
-        <AppInputField v-model="userAuthentication.loginInfo.username" :type="'text'" :placeholder="'Type your username'">
+        <AppInputField v-model="loginInfo.username" @keydown.enter="userAuthentication.login(loginInfo.username, loginInfo.password)" :type="'text'" :placeholder="'Type your username'">
           <template #text>
             Username
           </template>
@@ -28,7 +38,7 @@ const userAuthentication = useCounterStore()
           </template>
         </AppInputField>
 
-        <AppInputField v-model="userAuthentication.loginInfo.password" :type="'password'" :placeholder="'Type your password'">
+        <AppInputField v-model="loginInfo.password" @keydown.enter="userAuthentication.login(loginInfo.username, loginInfo.password)" :type="'password'" :placeholder="'Type your password'">
           <template #text>
             Password
           </template>
@@ -36,13 +46,16 @@ const userAuthentication = useCounterStore()
             <p>lock</p>
           </template>
         </AppInputField>
+        <p v-if="userAuthentication.loginError" class="text-red-500 text-center">
+          Invalid username or password
+        </p>
         <div class="flex justify-end items-center">
           <span class="text-right text-gray-600 pt-1.5 text-[13px] cursor-pointer select-none hover:text-indigo-600">Forgot password?</span>
-        </div>   
+        </div>
       </div>
 
       <!-- Login button -->
-      <AppButton @click="userAuthentication.login" class="w-[218px] h-[35px] text-[14px] mt-[20px]">
+      <AppButton @click="userAuthentication.login(loginInfo.username, loginInfo.password)" class="w-[218px] h-[35px] text-[14px] mt-[20px]">
         LOGIN
       </AppButton>
         <div class="mt-auto">

@@ -1,26 +1,21 @@
 import { ref, reactive, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
+import axios from 'axios';
 
 export const useCounterStore = defineStore('userAuthentication', () => {
 
   const router = useRouter()
 
+  const hostname = 'http://localhost:3000/'
+  const registerEndpoint = 'register'
+  const loginEndpoint = 'login'
+
   /* State */
 
   const isLoggedIn = ref<boolean>(false)
+  const loginError = ref('')
 
-  interface LoginInfo {
-    username: string,
-    password: string
-  }
-
-  const loginInfo = reactive<LoginInfo>({
-    username: '',
-    password: ''
-  })
-
-  const sentLoginInfo: LoginInfo = loginInfo
 
   /* Actions */
   const toLogin = () => {
@@ -38,18 +33,37 @@ export const useCounterStore = defineStore('userAuthentication', () => {
     router.push({ name: 'Login' })
   }
 
-  const login = () => {
+  const register = (username: string, password: string) => {
+    router.push({ name: 'Login' })
+  }
+
+  const login = (username: string, password: string) => {
     // Checks if the input fields are not empty
-    if (loginInfo.username && loginInfo.password !== '') {
-      console.log('sent:' + sentLoginInfo) // 
-      loginInfo.username = '' // Sets the values back to ''
-      loginInfo.password = '' // Sets the values back to ''
-      isLoggedIn.value = true
+    if (username && password !== '') {
+      // If the input values are not empty
+      console.log(username)
+      console.log(password)
+
+      axios.post(hostname + loginEndpoint, {
+        username: username,
+        password: password,
+      })
+      .then(response => {
+        console.log('Register success:', response.data);
+      })
+      .catch(error => {
+        console.error('Register error:', error.response.data);
+      });
+
+      // isLoggedIn.value = true
+
+      loginError.value = ''
     }
     else {
       console.log('Invalid email address or password')
+      loginError.value = 'error';
     }
-    router.push({ name: 'Dashboard' })
+    // router.push({ name: 'Dashboard' })
   }
 
 
@@ -58,19 +72,17 @@ export const useCounterStore = defineStore('userAuthentication', () => {
     console.log(newValue)
   })
 
-  watch(loginInfo, (newValue) => {
-    console.log(newValue)
-  })
 
   return {
     // State
     isLoggedIn,
-    loginInfo,
+    loginError,
 
     // Actions
     toLogin,
     toSignUp,
     logout,
+    register,
     login,
   }
 
