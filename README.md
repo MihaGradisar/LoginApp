@@ -31,3 +31,14 @@ npm run dev
 ```sh
 npm run build
 ```
+
+# To do list
+
+-show and hide the password
+-finish the styles for mobile
+-finish the drawer
+-logic for the register
+-save token
+-finish the login and logout logic
+-vue query
+-book library display

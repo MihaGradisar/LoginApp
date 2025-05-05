@@ -13,7 +13,7 @@ export const useCounterStore = defineStore('userAuthentication', () => {
 
   /* State */
 
-  const isLoggedIn = ref<boolean>(false)
+  const isLoggedIn = ref<boolean>(true)
   const loginError = ref('')
 
 
@@ -52,7 +52,7 @@ export const useCounterStore = defineStore('userAuthentication', () => {
         console.log('Register success:', response.data);
       })
       .catch(error => {
-        console.error('Register error:', error.response.data);
+        loginError.value = 'error';
       });
 
       // isLoggedIn.value = true
