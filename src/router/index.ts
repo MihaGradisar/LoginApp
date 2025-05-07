@@ -13,14 +13,11 @@ import SignUpView from '@/views/SignUpView.vue'
 
 import { userLoggedIn, userLoggedOut } from './middleware/authMiddleware'
 
-
 import { useCounterStore } from '@/stores/userAuthentication'
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-
     {
       path: '/',
       name: 'Dashboard',
@@ -76,8 +73,7 @@ router.beforeEach((to, from, next) => {
   const userAuthentication = useCounterStore()
   if (userAuthentication.isLoggedIn) {
     userLoggedIn(to, from, next)
-  }
-  else {
+  } else {
     userLoggedOut(to, from, next)
   }
 })
