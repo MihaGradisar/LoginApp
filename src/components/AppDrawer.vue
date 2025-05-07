@@ -78,13 +78,11 @@ const drawerToggle = () => {
                     src=""
                     alt="user img"
                   />
-                  <h1 class="mx-3 font-bold text-gray-700">
-                    {{ userAuthentication.globalUsername }}
-                  </h1>
+                  <h1 class="mx-3 font-bold text-[20px] text-gray-700">User</h1>
                   <p class="mx-3 text-gray-500">name.surname@gmail.com</p>
                 </div>
               </div>
-              <h1 class="mx-3 font-bold text-gray-700">Menu</h1>
+              <h1 class="mx-3 font-bold text-gray-700 mt-3">Menu</h1>
 
               <!-- Drawer buttons -->
               <div v-for="button in buttons">

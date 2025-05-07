@@ -39,7 +39,6 @@ const loginMutation = useMutation({
     manageLogin(username, password),
   onSuccess: (data) => {
     localStorage.setItem('token', data.token)
-    userAuthentication.globalUsername = loginInfo.username // gets the name for the drawer to display
     userAuthentication.isLoggedIn = true
     router.push({ name: 'Dashboard' })
   },

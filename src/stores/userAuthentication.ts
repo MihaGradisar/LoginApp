@@ -14,7 +14,6 @@ export const useCounterStore = defineStore('userAuthentication', () => {
 
   const token = ref('')
   const loginError = ref('')
-  const globalUsername = ref('')
 
   /* Actions */
   const toLogin = () => {
@@ -43,8 +42,6 @@ export const useCounterStore = defineStore('userAuthentication', () => {
     // State
     isLoggedIn,
     loginError,
-    globalUsername,
-    // token,
 
     // Actions
     toLogin,
