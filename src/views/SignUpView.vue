@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useCounterStore } from '@/stores/userAuthentication'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useMutation } from '@tanstack/vue-query'
+import axios from 'axios'
 
 import AppInputField from '@/components/AppInputField.vue'
 import AppButton from '@/components/AppButton.vue'
@@ -17,6 +20,35 @@ const registerInfo: RegisterInfo = {
   username: '',
   password: '',
 }
+
+const router = useRouter()
+
+const API_URL = 'http://localhost:3000'
+const showError = ref(false)
+
+const manageRegister = async (username: string, password: string) => {
+  if (username && password !== '') {
+    const registerResponse = await axios.post(`${API_URL}/register`, {
+      username: username,
+      password: password,
+    })
+    return registerResponse.data
+  } else {
+    showError.value = true
+  }
+}
+
+const registerMutation = useMutation({
+  mutationFn: ({ username, password }: RegisterInfo) =>
+    manageRegister(username, password),
+  onSuccess: (data) => {
+    console.log(data.message)
+    router.push({ name: 'Login' })
+  },
+  onError: (error) => {
+    console.error(error.message)
+  },
+})
 </script>
 
 <template>
@@ -32,6 +64,7 @@ const registerInfo: RegisterInfo = {
       <div>
         <AppInputField
           v-model="registerInfo.username"
+          @keydown.enter="registerMutation.mutate(registerInfo)"
           :type="'text'"
           :placeholder="'Type your username'"
         >
@@ -43,6 +76,7 @@ const registerInfo: RegisterInfo = {
 
         <AppInputField
           v-model="registerInfo.password"
+          @keydown.enter="registerMutation.mutate(registerInfo)"
           :type="'password'"
           :placeholder="'Type your password'"
         >
@@ -54,14 +88,13 @@ const registerInfo: RegisterInfo = {
         <div class="flex justify-end items-center"></div>
       </div>
 
-      <!-- Login button -->
+      <p v-if="showError" class="text-red-500 text-center">
+        Weak username or password
+      </p>
+
+      <!-- Sign Up button -->
       <AppButton
-        @click="
-          userAuthentication.signUp(
-            registerInfo.username,
-            registerInfo.password,
-          )
-        "
+        @click="registerMutation.mutate(registerInfo)"
         class="w-[218px] h-[35px] text-[14px] mt-[20px]"
       >
         SIGN UP
@@ -70,7 +103,7 @@ const registerInfo: RegisterInfo = {
         <p class="text-center text-gray-600 py-2 text-[12px]">
           Already have an account?
         </p>
-        <!-- Sign Up button -->
+        <!-- to Login button -->
         <p
           @click="userAuthentication.toLogin"
           class="text-center text-gray-900 mb-4 text-[13px] cursor-pointer select-none hover:text-indigo-600"

@@ -110,7 +110,7 @@ const loginMutation = useMutation({
         </p>
         <!-- Sign Up button -->
         <p
-          @click="userAuthentication.toSignUp"
+          @click="userAuthentication.toRegister"
           class="text-center text-gray-900 mb-4 text-[13px] cursor-pointer select-none hover:text-indigo-600"
         >
           SIGN UP

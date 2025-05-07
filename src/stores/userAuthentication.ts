@@ -2,7 +2,6 @@ import { ref, reactive, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
 import { useQuery } from '@tanstack/vue-query'
-
 import axios from 'axios'
 
 export const useCounterStore = defineStore('userAuthentication', () => {
@@ -26,9 +25,9 @@ export const useCounterStore = defineStore('userAuthentication', () => {
     router.push({ name: 'Login' })
   }
 
-  const toSignUp = () => {
+  const toRegister = () => {
     isLoggedIn.value = false
-    router.push({ name: 'SignUp' })
+    router.push({ name: 'Register' })
   }
 
   const logout = () => {
@@ -37,9 +36,18 @@ export const useCounterStore = defineStore('userAuthentication', () => {
     router.push({ name: 'Login' })
   }
 
-  const signUp = (username: string, password: string) => {
-    router.push({ name: 'Login' })
+  const fetchBooks = async () => {
+    const fetchBooksResponse = await axios.get(`${API_URL}/books`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return fetchBooksResponse.data
   }
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['books'],
+  })
 
   // TEST CODE for checking the login status
   watch(isLoggedIn, (newValue) => {
@@ -56,8 +64,7 @@ export const useCounterStore = defineStore('userAuthentication', () => {
 
     // Actions
     toLogin,
-    toSignUp,
+    toRegister,
     logout,
-    signUp,
   }
 })
