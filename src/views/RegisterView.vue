@@ -49,6 +49,14 @@ const registerMutation = useMutation({
     console.error(error.message)
   },
 })
+
+const {
+  mutate: useRegister,
+  isPending,
+  isSuccess,
+  isError,
+  error,
+} = useRegisterMutation(registerInfo.username, registerInfo.password)
 </script>
 
 <template>
@@ -94,7 +102,7 @@ const registerMutation = useMutation({
 
       <!-- Sign Up button -->
       <AppButton
-        @click="registerMutation.mutate(registerInfo)"
+        @click="useRegister()"
         class="w-[218px] h-[35px] text-[14px] mt-[20px]"
       >
         SIGN UP

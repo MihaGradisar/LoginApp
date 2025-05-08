@@ -25,24 +25,18 @@ export const useBookQuery = () => {
   })
 }
 
-interface RegisterVariables {
-  username: string
-  password: string
-}
-
-const handleRegister = async (username: string, password: string) => {
-  const registerResponse = await axios.post(`${API_URL}/register`, {
-    username: username,
-    password: password,
-  })
-  return registerResponse.data
-}
-
 export const useRegisterMutation = (username: string, password: string) => {
   return useMutation({
-    mutationFn: ({ username, password }: RegisterVariables) =>
-      handleRegister(username, password),
-    onSuccess: (data) => {},
-    onError: (data) => {},
+    mutationFn: () =>
+      axios.post(`${API_URL}/register`, {
+        username: username,
+        password: password,
+      }),
+    onSuccess: (data) => {
+      console.log(data)
+    },
+    onError: (error) => {
+      console.error('Error:', error)
+    },
   })
 }
