@@ -9,7 +9,7 @@ import AuthenticationView from '@/views/AuthenticationView.vue'
 import PageNotFoundView from '@/views/PageNotFoundView.vue'
 
 import LoginView from '@/views/LoginView.vue'
-import SignUpView from '@/views/SignUpView.vue'
+import SignUpView from '@/views/RegisterView.vue'
 
 import { userLoggedIn, userLoggedOut } from './middleware/authMiddleware'
 

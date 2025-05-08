@@ -5,8 +5,7 @@ import { useRouter } from 'vue-router'
 import AppDrawerButton from './AppDrawerButton.vue'
 import AppLogoutButton from './AppLogoutButton.vue'
 
-import buttons from '../data/drawerButtons.json'
-
+import buttons from '../assets/layout/drawerButtons.json'
 import { ref } from 'vue'
 
 const userAuthentication = useCounterStore()

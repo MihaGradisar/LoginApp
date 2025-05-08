@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { useQuery } from '@tanstack/vue-query'
+import { API_URL } from '@/composables/useApi'
 import axios from 'axios'
-
-const API_URL = 'http://localhost:3000'
 
 const fetchBooks = async () => {
   const token = localStorage.getItem('token')
@@ -27,8 +26,11 @@ const { data, isLoading, error } = useQuery({
     <h1>This is Dashboard page</h1>
     <p v-if="isLoading">Loading...</p>
     <p v-if="error">Oops!</p>
-    <ul v-for="book in data">
-      <li key="book.id">{{ book.title }}</li>
-    </ul>
+    <div v-for="book in data">
+      <ul :key="book.id">
+        <li>{{ book.title }}</li>
+        <li>{{ book.author }}</li>
+      </ul>
+    </div>
   </div>
 </template>

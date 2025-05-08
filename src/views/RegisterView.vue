@@ -3,6 +3,7 @@ import { useCounterStore } from '@/stores/userAuthentication'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMutation } from '@tanstack/vue-query'
+import { API_URL } from '../composables/useApi.ts'
 import axios from 'axios'
 
 import AppInputField from '@/components/AppInputField.vue'
@@ -23,7 +24,6 @@ const registerInfo: RegisterInfo = {
 
 const router = useRouter()
 
-const API_URL = 'http://localhost:3000'
 const showError = ref(false)
 
 const manageRegister = async (username: string, password: string) => {
