@@ -5,7 +5,7 @@ export const API_URL = 'http://localhost:3000'
 
 export const BOOKS_KEYS = ['book']
 
-const fetchBooks = async () => {
+const manageFetchBooks = async () => {
   const token = localStorage.getItem('token')
   const fetchBooksResponse = await axios.get(`${API_URL}/books`, {
     headers: {
@@ -16,10 +16,10 @@ const fetchBooks = async () => {
   return fetchBooksResponse.data
 }
 
-const useBookQuery = () => {
+export const useBookQuery = () => {
   return useQuery({
     queryKey: BOOKS_KEYS,
-    queryFn: fetchBooks,
+    queryFn: manageFetchBooks,
     refetchInterval: 5000,
     enabled: !!localStorage.getItem('token'),
   })
