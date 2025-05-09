@@ -1,4 +1,4 @@
-import { ref, reactive, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
 import { QueryClient } from '@tanstack/vue-query'
@@ -9,10 +9,8 @@ export const useCounterStore = defineStore('userAuthentication', () => {
   const router = useRouter()
 
   /* State */
-
   const isLoggedIn = ref(false)
 
-  const token = ref('')
   const loginError = ref('')
 
   /* Actions */

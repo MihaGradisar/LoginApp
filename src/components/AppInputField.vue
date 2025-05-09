@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const input = defineModel<string>()
-defineProps<{ placeholder: string, type: string }>()
+defineProps<{ placeholder: string; type: string; modelValue: string }>()
 </script>
 
 <template>
@@ -13,10 +12,11 @@ defineProps<{ placeholder: string, type: string }>()
         <slot name="icon"></slot>
       </span>
       <input
-        v-model="input"
         :placeholder="placeholder"
         :type="type"
         class="focus:outline-none"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
     </div>
     <div class="border-b"></div>

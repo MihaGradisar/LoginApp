@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/vue-query'
+import { type Ref } from 'vue'
 import axios from 'axios'
 
 export const API_URL = 'http://localhost:3000'
@@ -25,15 +26,21 @@ export const useBookQuery = () => {
   })
 }
 
-export const useRegisterMutation = (username: string, password: string) => {
+export const useRegisterMutation = ({
+  username,
+  password,
+}: {
+  username: Ref<string>
+  password: Ref<string>
+}) => {
   return useMutation({
     mutationFn: () =>
       axios.post(`${API_URL}/register`, {
-        username: username,
-        password: password,
+        username: username.value,
+        password: password.value,
       }),
     onSuccess: (data) => {
-      console.log(data)
+      console.log(data.status)
     },
     onError: (error) => {
       console.error('Error:', error)

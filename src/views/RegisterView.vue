@@ -1,54 +1,19 @@
 <script setup lang="ts">
 import { useCounterStore } from '@/stores/userAuthentication'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useMutation } from '@tanstack/vue-query'
-import { API_URL, useRegisterMutation } from '../composables/useApi.ts'
-import axios from 'axios'
-
+import { useRegisterMutation } from '../composables/useApi.ts'
 import AppInputField from '@/components/AppInputField.vue'
-import AppButton from '@/components/AppButton.vue'
+import AppButton from '@/components/AppButton.vue' // Pinia store
 
-// Pinia store
 const userAuthentication = useCounterStore()
 
-interface RegisterInfo {
-  username: string
-  password: string
-}
-
-const registerInfo: RegisterInfo = {
-  username: '',
-  password: '',
-}
+const username = ref('')
+const password = ref('')
 
 const router = useRouter()
 
 const showError = ref(false)
-
-const manageRegister = async (username: string, password: string) => {
-  if (username && password !== '') {
-    const registerResponse = await axios.post(`${API_URL}/register`, {
-      username: username,
-      password: password,
-    })
-    return registerResponse.data
-  } else {
-    showError.value = true
-  }
-}
-
-const registerMutation = useMutation({
-  mutationFn: ({ username, password }: RegisterInfo) =>
-    manageRegister(username, password),
-  onSuccess: (data) => {
-    console.log(data.message)
-    router.push({ name: 'Login' })
-  },
-  onError: (error) => {
-    console.error(error.message)
-  },
-})
 
 const {
   mutate: useRegister,
@@ -56,9 +21,24 @@ const {
   isSuccess,
   isError,
   error,
-} = useRegisterMutation(registerInfo.username, registerInfo.password)
-</script>
+} = useRegisterMutation({
+  username: computed(() => username.value),
+  password: computed(() => password.value),
+})
 
+// Logic for the register
+const handleRegister = () => {
+  if (!username.value || !password.value || password.value.length < 6) {
+    showError.value = true
+    return
+  } else {
+    useRegister()
+  }
+  if (isSuccess) {
+    router.push({ name: 'Login' })
+  }
+}
+</script>
 <template>
   <div class="flex justify-center items-center w-screen h-screen bg-gray-50">
     <div
@@ -71,8 +51,8 @@ const {
       <!-- Input fields -->
       <div>
         <AppInputField
-          v-model="registerInfo.username"
-          @keydown.enter="registerMutation.mutate(registerInfo)"
+          v-model="username"
+          @keydown.enter="handleRegister()"
           :type="'text'"
           :placeholder="'Type your username'"
         >
@@ -81,10 +61,9 @@ const {
             <p>person</p>
           </template>
         </AppInputField>
-
         <AppInputField
-          v-model="registerInfo.password"
-          @keydown.enter="registerMutation.mutate(registerInfo)"
+          v-model="password"
+          @keydown.enter="handleRegister()"
           :type="'password'"
           :placeholder="'Type your password'"
         >
@@ -95,14 +74,12 @@ const {
         </AppInputField>
         <div class="flex justify-end items-center"></div>
       </div>
-
       <p v-if="showError" class="text-red-500 text-center">
         Weak username or password
       </p>
-
       <!-- Sign Up button -->
       <AppButton
-        @click="useRegister()"
+        @click="handleRegister()"
         class="w-[218px] h-[35px] text-[14px] mt-[20px]"
       >
         SIGN UP
