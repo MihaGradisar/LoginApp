@@ -1,52 +1,46 @@
 <script setup lang="ts">
 import { useCounterStore } from '@/stores/userAuthentication'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useMutation } from '@tanstack/vue-query'
-import { API_URL } from '../composables/useApi.ts'
-import axios from 'axios'
-
+import { useLoginMutation } from '../composables/useApi.ts'
 import AppInputField from '@/components/AppInputField.vue'
 import AppButton from '@/components/AppButton.vue'
 
 // Pinia store
 const userAuthentication = useCounterStore()
 
-interface LoginInfo {
-  username: string
-  password: string
-}
-
-const loginInfo: LoginInfo = {
-  username: '',
-  password: '',
-}
+const username = ref('')
+const password = ref('')
 
 const router = useRouter()
 
 const showError = ref(false)
 
-const manageLogin = async (username: string, password: string) => {
-  const loginResponse = await axios.post(`${API_URL}/login`, {
-    username: username,
-    password: password,
-  })
-  return loginResponse.data
-}
-
-const loginMutation = useMutation({
-  mutationFn: ({ username, password }: LoginInfo) =>
-    manageLogin(username, password),
-  onSuccess: (data) => {
-    localStorage.setItem('token', data.token)
-    userAuthentication.isLoggedIn = true
-    router.push({ name: 'Dashboard' })
-  },
-  onError: (error) => {
-    showError.value = true
-    console.error(error.message)
-  },
+// Use the exported useLoginMutation function
+const { mutate: useLogin } = useLoginMutation({
+  username: computed(() => username.value),
+  password: computed(() => password.value),
 })
+
+// Logic for handling login
+const handleLogin = () => {
+  if (!username.value || !password.value) {
+    showError.value = true
+    return
+  }
+  showError.value = false
+
+  useLogin(undefined, {
+    onSuccess: (data) => {
+      localStorage.setItem('token', data.data.token)
+      userAuthentication.isLoggedIn = true
+      router.push({ name: 'Dashboard' })
+    },
+    onError: () => {
+      showError.value = true
+    },
+  })
+}
 </script>
 
 <template>
@@ -61,8 +55,8 @@ const loginMutation = useMutation({
       <!-- Input fields -->
       <div>
         <AppInputField
-          v-model="loginInfo.username"
-          @keydown.enter="loginMutation.mutate(loginInfo)"
+          v-model="username"
+          @keydown.enter="handleLogin()"
           :type="'text'"
           :placeholder="'Type your username'"
         >
@@ -73,8 +67,8 @@ const loginMutation = useMutation({
         </AppInputField>
 
         <AppInputField
-          v-model="loginInfo.password"
-          @keydown.enter="loginMutation.mutate(loginInfo)"
+          v-model="password"
+          @keydown.enter="handleLogin()"
           :type="'password'"
           :placeholder="'Type your password'"
         >
@@ -96,7 +90,7 @@ const loginMutation = useMutation({
 
       <!-- Login button -->
       <AppButton
-        @click="loginMutation.mutate(loginInfo)"
+        @click="handleLogin()"
         class="w-[218px] h-[35px] text-[14px] mt-[20px]"
       >
         LOGIN

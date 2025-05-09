@@ -47,3 +47,25 @@ export const useRegisterMutation = ({
     },
   })
 }
+
+export const useLoginMutation = ({
+  username,
+  password,
+}: {
+  username: Ref<string>
+  password: Ref<string>
+}) => {
+  return useMutation({
+    mutationFn: () =>
+      axios.post(`${API_URL}/login`, {
+        username: username.value,
+        password: password.value,
+      }),
+    onSuccess: (data) => {
+      console.log(data.status)
+    },
+    onError: (error) => {
+      console.error(error)
+    },
+  })
+}

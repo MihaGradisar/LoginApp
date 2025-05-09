@@ -16,7 +16,12 @@ defineProps<{ placeholder: string; type: string; modelValue: string }>()
         :type="type"
         class="focus:outline-none"
         :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="
+          $emit(
+            'update:modelValue',
+            ($event.target as HTMLInputElement)?.value || '',
+          )
+        "
       />
     </div>
     <div class="border-b"></div>

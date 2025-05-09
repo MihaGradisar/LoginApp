@@ -15,28 +15,27 @@ const router = useRouter()
 
 const showError = ref(false)
 
-const {
-  mutate: useRegister,
-  isPending,
-  isSuccess,
-  isError,
-  error,
-} = useRegisterMutation({
+const { mutate: useRegister } = useRegisterMutation({
   username: computed(() => username.value),
   password: computed(() => password.value),
 })
 
 // Logic for the register
 const handleRegister = () => {
-  if (!username.value || !password.value || password.value.length < 6) {
+  if (!username.value || !password.value) {
     showError.value = true
     return
-  } else {
-    useRegister()
   }
-  if (isSuccess) {
-    router.push({ name: 'Login' })
-  }
+  showError.value = false
+
+  useRegister(undefined, {
+    onSuccess: () => {
+      router.push({ name: 'Login' })
+    },
+    onError: () => {
+      showError.value = true
+    },
+  })
 }
 </script>
 <template>
