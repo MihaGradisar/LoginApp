@@ -6,6 +6,7 @@ export const API_URL = 'http://localhost:3000'
 
 export const BOOKS_KEYS = ['book']
 
+// Query
 const handleFetchBooks = async () => {
   const token = localStorage.getItem('token')
   const fetchBooksResponse = await axios.get(`${API_URL}/books`, {

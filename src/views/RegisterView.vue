@@ -3,6 +3,7 @@ import { useCounterStore } from '@/stores/userAuthentication'
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useRegisterMutation } from '../composables/useApi.ts'
+import { useToast } from 'primevue/usetoast'
 import AppInputField from '@/components/AppInputField.vue'
 import AppButton from '@/components/AppButton.vue' // Pinia store
 
@@ -14,6 +15,8 @@ const password = ref('')
 const router = useRouter()
 
 const showError = ref(false)
+
+const toast = useToast()
 
 const { mutate: useRegister } = useRegisterMutation({
   username: computed(() => username.value),
@@ -31,10 +34,30 @@ const handleRegister = () => {
   useRegister(undefined, {
     onSuccess: () => {
       router.push({ name: 'Login' })
+      showRegisterSuccess()
     },
     onError: () => {
       showError.value = true
+      showRegisterError()
     },
+  })
+}
+
+const showRegisterSuccess = () => {
+  toast.add({
+    severity: 'success',
+    summary: 'Success',
+    detail: 'Register successful',
+    life: 3000,
+  })
+}
+
+const showRegisterError = () => {
+  toast.add({
+    severity: 'error',
+    summary: 'Error',
+    detail: 'Invalid username or password',
+    life: 3000,
   })
 }
 </script>

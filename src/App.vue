@@ -2,6 +2,7 @@
 import { useCounterStore } from '@/stores/userAuthentication'
 import { onMounted } from 'vue'
 import AppDrawer from './components/AppDrawer.vue'
+import { Toast } from 'primevue'
 
 const userAuthentication = useCounterStore()
 
@@ -19,6 +20,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <Toast />
   <AppDrawer v-if="userAuthentication.isLoggedIn && $route.name !== '404'" />
   <RouterView v-else />
 </template>

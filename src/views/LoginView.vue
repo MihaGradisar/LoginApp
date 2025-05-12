@@ -6,6 +6,8 @@ import { useLoginMutation } from '../composables/useApi.ts'
 import AppInputField from '@/components/AppInputField.vue'
 import AppButton from '@/components/AppButton.vue'
 
+import { useToast } from 'primevue/usetoast'
+
 // Pinia store
 const userAuthentication = useCounterStore()
 
@@ -15,6 +17,8 @@ const password = ref('')
 const router = useRouter()
 
 const showError = ref(false)
+
+const toast = useToast()
 
 // Use the exported useLoginMutation function
 const { mutate: useLogin } = useLoginMutation({
@@ -35,10 +39,30 @@ const handleLogin = () => {
       localStorage.setItem('token', data.data.token)
       userAuthentication.isLoggedIn = true
       router.push({ name: 'Dashboard' })
+      showLoginSuccess()
     },
     onError: () => {
       showError.value = true
+      showLoginError()
     },
+  })
+}
+
+const showLoginSuccess = () => {
+  toast.add({
+    severity: 'success',
+    summary: 'Success',
+    detail: 'Login successful',
+    life: 3000,
+  })
+}
+
+const showLoginError = () => {
+  toast.add({
+    severity: 'error',
+    summary: 'Error',
+    detail: 'Invalid username or password',
+    life: 3000,
   })
 }
 </script>
